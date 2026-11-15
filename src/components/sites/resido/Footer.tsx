@@ -4,140 +4,103 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 const navLinks = [
+  { label: "About", href: "/about" },
   { label: "Products", href: "/works" },
   { label: "Why Sayaro", href: "/#why-sayaro" },
   { label: "Contact", href: "/contact" },
 ];
 
 const socialLinks = [
-  {
-    letters: ["I", "M"],
-    separator: "",
-    href: "https://www.indiamart.com/thermalscientificinstruments",
-  },
+  { label: "IM", href: "https://www.indiamart.com/thermalscientificinstruments" },
 ];
-
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
 
 export function Footer() {
   return (
-    <footer className="max-w-[1400px] mx-auto px-6 py-16">
-      {/* Top section */}
+    <footer className="mx-auto max-w-[1400px] px-6 py-10">
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
-        className="relative"
       >
-        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10">
-          {/* Logo */}
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
           <div className="shrink-0">
-            <span className="font-heading text-[48px] lg:text-[64px] font-medium tracking-tight leading-none">
-              Sayaro.Inc<sup className="text-[0.45em] align-super">&trade;</sup>
-            </span>
+            <div className="flex items-center gap-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="-260 -260 520 520"
+                aria-hidden="true"
+                className="h-[56px] lg:h-[72px] w-auto text-[#13171B]"
+              >
+                <path
+                  fill="currentColor"
+                  fillRule="evenodd"
+                  d="M-5.66 -0.00 L-95.66 90.00 L0.00 185.66 L95.66 90.00 L5.66 -0.00 L95.66 -90.00 L0.00 -185.66 L-95.66 -90.00 Z M4.00 -9.66 L4.00 -170.34 L84.34 -90.00 Z M-84.34 -90.00 L-4.00 -170.34 L-4.00 -9.66 Z M84.34 90.00 L4.00 170.34 L4.00 9.66 Z M-84.34 90.00 L-4.00 9.66 L-4.00 170.34 Z M0.00 255.66 L255.66 0.00 L0.00 -255.66 L-255.66 0.00 Z M0.00 244.34 L-244.34 0.00 L0.00 -244.34 L244.34 0.00 Z"
+                />
+              </svg>
+              <span className="font-heading text-[48px] lg:text-[64px] font-medium tracking-tight leading-none">
+                Sayaro
+              </span>
+            </div>
           </div>
 
-          {/* Navigation + Socials columns */}
-          <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:pr-16">
-            {/* Navigation */}
-            <div>
-              <p className="text-sm text-neutral-400 mb-4">Navigation</p>
-              <ul className="flex flex-wrap gap-4 lg:gap-6">
-                {navLinks.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="font-heading text-[15px] tracking-tight hover:opacity-70 transition-opacity"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="flex flex-col gap-3">
+            <span className="text-sm text-neutral-400">Navigation</span>
+            <ul className="flex flex-wrap gap-5">
+              {navLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="font-heading text-[15px] tracking-tight hover:opacity-70 transition-opacity"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            {/* Socials */}
-            <div>
-              <p className="text-sm text-neutral-400 mb-4">Socials</p>
-              <ul className="flex flex-wrap gap-3 lg:gap-4">
-                {socialLinks.map((social) => (
-                  <li key={social.href}>
-                    <a
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-heading text-[15px] tracking-tight flex gap-1 hover:opacity-70 transition-opacity"
-                    >
-                      {social.letters.map((letter) => (
-                        <span key={letter}>{letter}</span>
-                      ))}
-                      {social.separator && (
-                        <span className="text-neutral-400 ml-1">
-                          {social.separator}
-                        </span>
-                      )}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="flex flex-col gap-3">
+            <span className="text-sm text-neutral-400">Socials</span>
+            <ul className="flex gap-3">
+              {socialLinks.map((social) => (
+                <li key={social.href}>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-heading text-[15px] tracking-tight hover:opacity-70 transition-opacity"
+                  >
+                    {social.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-
-        {/* Back to top */}
-        <button
-          onClick={scrollToTop}
-          className="absolute bottom-0 right-0 size-12 flex items-center justify-center rounded-full bg-black text-white hover:opacity-80 transition-opacity"
-          aria-label="Back to top"
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M10 16V4m0 0-5 5m5-5 5 5"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
       </motion.div>
 
-      {/* Divider */}
-      <hr className="border-t border-neutral-200 my-10" />
+      <hr className="my-6 border-t border-neutral-200" />
 
-      {/* Bottom bar */}
       <motion.div
-        initial={{ opacity: 0, y: 60 }}
+        initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{
-          duration: 0.7,
-          delay: 0.2,
-          ease: [0.16, 1, 0.3, 1] as const,
-        }}
+        transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] as const }}
       >
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-neutral-400">
+        <div className="flex flex-col gap-3 text-sm text-neutral-400 md:flex-row md:items-center md:justify-between">
           <span>Chennai, India</span>
-          <span>&copy;2026 Sayaro.Inc.&trade; All rights reserved.</span>
+          <span>&copy;2026 Sayaro. All rights reserved.</span>
           <div className="flex gap-4">
             <Link
               href="/legal/privacy-policy"
-              className="font-heading text-sm text-neutral-400 hover:text-black transition-colors"
+              className="font-heading text-sm text-neutral-400 transition-colors hover:text-[#13171B]"
             >
               Privacy Policy
             </Link>
             <Link
               href="/legal/terms-of-use"
-              className="font-heading text-sm text-neutral-400 hover:text-black transition-colors"
+              className="font-heading text-sm text-neutral-400 transition-colors hover:text-[#13171B]"
             >
               Terms of Use
             </Link>

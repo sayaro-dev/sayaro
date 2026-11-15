@@ -13,7 +13,7 @@ export function CEOCard() {
           className="rounded-full object-cover"
         />
         <div>
-          <h6 className="font-heading text-sm font-medium tracking-tight text-black">
+          <h6 className="font-heading text-sm font-medium tracking-tight text-[#13171B]">
             Hi, I&apos;m Aravindh from Sayaro
           </h6>
           <p className="text-sm text-neutral-500">Reach out for any equipment enquiry.</p>

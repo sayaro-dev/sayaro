@@ -29,7 +29,7 @@ function MailIcon() {
 
 export function ContactCTA() {
   return (
-    <section className="py-20 bg-[#f7f7f7]">
+    <section className="py-20 bg-[#FAFAFA]">
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12 lg:gap-16">
           {/* Left — heading + offices */}
@@ -41,7 +41,7 @@ export function ContactCTA() {
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
             >
               <h3 className="font-heading text-[32px] lg:text-[40px] font-medium tracking-tight">
-                <span className="text-black">Need Laboratory Equipment?</span>{" "}
+                <span className="text-[#13171B]">Need Laboratory Equipment?</span>{" "}
                 <span className="text-neutral-400">Let&apos;s Talk</span>
               </h3>
               <p className="text-neutral-500 mt-3">

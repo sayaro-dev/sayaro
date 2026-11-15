@@ -1,49 +1,25 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { SectionLabel } from "./SectionLabel";
+import { ImagePlaceholder } from "./ImagePlaceholder";
+import { projects as allProductData } from "./data";
 
-const projects = [
-  {
-    title: "Vertical Autoclave",
-    year: "Sterilization",
-    location: "Laboratory & Healthcare",
-    image: "/sites/resido/images/project-stonehaven.png",
-    href: "/works/vertical-autoclave",
-  },
-  {
-    title: "BOD Incubator",
-    year: "Life Science",
-    location: "Environmental & Water Testing",
-    image: "/sites/resido/images/project-rivermark.png",
-    href: "/works/bod-incubator",
-  },
-  {
-    title: "Muffle Furnace — 1200°C",
-    year: "Thermal Processing",
-    location: "Material Testing & Research",
-    image: "/sites/resido/images/project-atlas.png",
-    href: "/works/muffle-furnace-1200c",
-  },
-  {
-    title: "Laminar Flow Cabinet",
-    year: "Safety & Airflow",
-    location: "Contamination-Free Work",
-    image: "/sites/resido/images/project-willow.png",
-    href: "/works/laminar-flow-cabinet",
-  },
-  {
-    title: "Constant Temperature Water Bath",
-    year: "Thermal Baths",
-    location: "Sample Incubation & Heating",
-    image: "/sites/resido/images/project-stonehaven.png",
-    href: "/works/constant-temperature-water-bath",
-  },
+const FEATURED_SLUGS = [
+  "vertical-autoclave",
+  "bod-incubator",
+  "muffle-furnace-1200c",
+  "laminar-flow-cabinet",
+  "constant-temperature-water-bath",
+  "co2-incubator",
 ];
 
-const allProjects = [...projects, ...projects];
+const featuredProducts = FEATURED_SLUGS.map(
+  (slug) => allProductData.find((p) => p.slug === slug)!
+);
+
+const allProjects = [...featuredProducts, ...featuredProducts];
 
 export function ProjectsCarousel() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -69,10 +45,10 @@ export function ProjectsCarousel() {
         >
           <SectionLabel>Our Products</SectionLabel>
 
-          <div className="flex gap-2 ml-4">
+          <div className="flex gap-2">
             <button
               onClick={() => scroll("prev")}
-              className="flex size-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-black transition-colors hover:bg-black hover:text-white"
+              className="flex size-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-[#13171B] transition-colors hover:bg-[#2F6BFF] hover:text-white"
               aria-label="Previous"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -81,7 +57,7 @@ export function ProjectsCarousel() {
             </button>
             <button
               onClick={() => scroll("next")}
-              className="flex size-10 items-center justify-center rounded-full bg-black text-white transition-opacity hover:opacity-80"
+              className="flex size-10 items-center justify-center rounded-full bg-[#2F6BFF] text-white transition-opacity hover:opacity-80"
               aria-label="Next"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -113,26 +89,19 @@ export function ProjectsCarousel() {
             {allProjects.map((project, i) => (
               <a
                 key={i}
-                href={project.href}
+                href={`/works/${project.slug}`}
                 className="group shrink-0 snap-start"
                 style={{ width: "min(520px, 80vw)" }}
               >
                 {/* White card wrapper */}
-                <div className="rounded-[15px] bg-white p-2">
-                  {/* 3 dots */}
+                <div className="rounded-[15px] bg-white p-2 border border-neutral-100 shadow-[0_1px_3px_0_rgba(0,0,0,0.04)] transition-shadow duration-300 group-hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.08)]">
                   <div className="flex gap-1.5 px-2 pt-2 pb-3">
                     <span className="size-[7px] rounded-full bg-neutral-300" />
                     <span className="size-[7px] rounded-full bg-neutral-300" />
                     <span className="size-[7px] rounded-full bg-neutral-700" />
                   </div>
-                  {/* Image */}
-                  <div className="relative aspect-[5/4] overflow-hidden rounded-xl bg-neutral-100">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
+                  <div className="relative aspect-[5/4] overflow-hidden rounded-xl">
+                    <ImagePlaceholder label={project.title} className="h-full w-full" />
                   </div>
                 </div>
                 {/* Title + meta below card */}
@@ -140,7 +109,7 @@ export function ProjectsCarousel() {
                   <h4 className="font-heading text-xl font-medium tracking-tight">
                     {project.title}
                   </h4>
-                  <p className="mt-1 font-mono text-sm text-neutral-500">
+                  <p className="mt-1 font-heading text-sm text-neutral-500">
                     {project.year} · {project.location}
                   </p>
                 </div>

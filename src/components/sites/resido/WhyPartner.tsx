@@ -88,10 +88,10 @@ export function WhyPartner() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
         >
-          <SectionLabel>Why partner with Sayaro</SectionLabel>
+
 
           <h3 className="mx-auto text-center font-heading text-[24px] font-medium tracking-tight leading-tight lg:text-[36px]">
-            <span className="text-black">
+            <span className="text-[#13171B]">
               We combine precision equipment, technical expertise,
             </span>{" "}
             <span className="text-neutral-400">
@@ -118,7 +118,7 @@ export function WhyPartner() {
         >
           {features.map((feature) => (
             <motion.div key={feature.title} variants={staggerItem}>
-              <div className="text-black mb-6">
+              <div className="text-[#13171B] mb-6">
                 {feature.icon}
               </div>
               <h4 className="font-heading text-[22px] font-medium tracking-tight">

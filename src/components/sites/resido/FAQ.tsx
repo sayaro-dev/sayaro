@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CEOCard } from "./CEOCard";
+import { PillButton } from "./PillButton";
 
 const faqs = [
   {
@@ -34,11 +34,7 @@ const faqs = [
 
 const staggerContainer = {
   hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
+  visible: { transition: { staggerChildren: 0.12 } },
 };
 
 const staggerItem = {
@@ -46,41 +42,49 @@ const staggerItem = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
 export function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <section className="py-20">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-6 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
         {/* Left column */}
         <motion.div
+          className="flex flex-col"
           initial={{ opacity: 0, x: -60 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
         >
-          <div>
-            <h3 className="font-heading text-[28px] font-medium tracking-tight leading-tight lg:text-[36px]">
-              Frequently Asked
-              <br />
-              Questions
-            </h3>
-            <p className="mt-4 text-sm text-neutral-500">
-              Common questions about our equipment, ordering process, and
-              support.
+          <h3 className="font-heading text-[28px] font-medium tracking-tight leading-tight lg:text-[36px]">
+            Frequently Asked
+            <br />
+            Questions
+          </h3>
+          <p className="mt-4 text-sm text-neutral-500">
+            Questions? We have answers. Here&apos;s what you need to know about
+            working with us.
+          </p>
+
+          <p className="mt-auto pt-10 text-sm text-neutral-500">
+            Need to ask something else?
+          </p>
+
+          <div className="mt-4 rounded-2xl bg-white p-6">
+            <div className="size-14 rounded-full bg-neutral-200" />
+            <p className="mt-4 font-heading text-sm font-medium">
+              Hi, I&apos;m Yagesh, Director of Sayaro.
             </p>
-            <p className="mt-8 text-sm text-neutral-500">
-              Need to ask something else?
-            </p>
+            <p className="text-sm text-neutral-500">Reach out anytime.</p>
             <div className="mt-4">
-              <CEOCard />
+              <PillButton href="/contact" variant="primary">
+                Ask Questions
+                <span className="ml-1 text-lg leading-none">&rsaquo;</span>
+              </PillButton>
             </div>
           </div>
         </motion.div>
@@ -103,30 +107,20 @@ export function FAQ() {
                 <button
                   type="button"
                   className="flex w-full cursor-pointer items-center justify-between p-6"
-                  onClick={() =>
-                    setOpenIndex(isOpen ? null : index)
-                  }
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
                   aria-expanded={isOpen}
                 >
-                  <h6 className="text-left font-heading text-base font-medium tracking-tight">
+                  <h6 className="text-left font-heading text-lg font-medium tracking-tight pr-4">
                     {faq.question}
                   </h6>
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className={`shrink-0 transition-transform duration-300 ${
-                      isOpen ? "rotate-45" : "rotate-0"
-                    }`}
+                  <div
+                    className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#13171B] text-white transition-transform duration-300"
+                    style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
                   >
-                    <line x1="12" y1="5" x2="12" y2="19" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </div>
                 </button>
                 <AnimatePresence initial={false}>
                   {isOpen && (

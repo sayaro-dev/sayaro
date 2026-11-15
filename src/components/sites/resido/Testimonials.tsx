@@ -73,13 +73,11 @@ export function Testimonials() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
         >
-          <SectionLabel>Testimonials</SectionLabel>
-
           {/* Prev/Next arrows */}
           <div className="flex gap-2 ml-4">
             <button
               onClick={() => scroll("prev")}
-              className="flex size-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-black transition-colors hover:bg-black hover:text-white"
+              className="flex size-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-[#13171B] transition-colors hover:bg-[#2F6BFF] hover:text-white"
               aria-label="Previous"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -88,7 +86,7 @@ export function Testimonials() {
             </button>
             <button
               onClick={() => scroll("next")}
-              className="flex size-10 items-center justify-center rounded-full bg-black text-white transition-opacity hover:opacity-80"
+              className="flex size-10 items-center justify-center rounded-full bg-[#2F6BFF] text-white transition-opacity hover:opacity-80"
               aria-label="Next"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

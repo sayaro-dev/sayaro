@@ -1,12 +1,12 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Navbar } from "@/components/sites/resido/Navbar";
+import { Header } from "@/components/ui/header-2";
 import { Footer } from "@/components/sites/resido/Footer";
 import { LenisWrapper } from "@/components/sites/resido/LenisWrapper";
 import { LetsBuildTogether } from "@/components/sites/resido/LetsBuildTogether";
 import { PillButton } from "@/components/sites/resido/PillButton";
 import { projects } from "@/components/sites/resido/data";
+import { ImagePlaceholder } from "@/components/sites/resido/ImagePlaceholder";
 
 export async function generateStaticParams() {
   return projects.map((project) => ({
@@ -81,15 +81,15 @@ export default async function WorkDetailPage({
 
   return (
     <LenisWrapper>
-      <Navbar />
+      <Header />
 
       <main>
         {/* Hero */}
-        <section className="bg-[#f7f7f7] pb-8 pt-32">
+        <section className="bg-[#FAFAFA] pb-8 pt-32">
           <div className="mx-auto max-w-[1400px] px-6">
             <Link
               href="/works"
-              className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-neutral-400 hover:text-neutral-600 transition-colors"
+              className="inline-flex items-center gap-1.5 font-heading text-xs uppercase tracking-wider text-neutral-400 hover:text-neutral-600 transition-colors"
             >
               <span>&larr;</span> All Products
             </Link>
@@ -102,10 +102,10 @@ export default async function WorkDetailPage({
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              <span className="rounded-full bg-black px-4 py-1.5 font-heading text-sm text-white">
+              <span className="rounded-full bg-[#2F6BFF] px-4 py-1.5 font-heading text-sm text-white">
                 {project.year}
               </span>
-              <span className="font-mono text-sm text-neutral-400">
+              <span className="font-heading text-sm text-neutral-400">
                 {project.location}
               </span>
             </div>
@@ -117,14 +117,8 @@ export default async function WorkDetailPage({
             {/* Image + Overview side by side */}
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
               {/* Left — Product image */}
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-neutral-100">
+                <ImagePlaceholder label={project.title} className="h-full w-full" />
               </div>
 
               {/* Right — Overview + Quick facts */}
@@ -141,7 +135,7 @@ export default async function WorkDetailPage({
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                   {quickFacts.map((fact) => (
                     <div key={fact.label} className="rounded-2xl bg-white p-5">
-                      <p className="font-mono text-xs uppercase tracking-wider text-neutral-400">
+                      <p className="font-heading text-xs uppercase tracking-wider text-neutral-400">
                         {fact.label}
                       </p>
                       <p className="mt-2 font-heading text-base font-medium tracking-tight">
@@ -192,7 +186,7 @@ export default async function WorkDetailPage({
             </div>
 
             {/* Inline CTA */}
-            <div className="mt-12 flex flex-col items-center gap-4 rounded-2xl bg-[#f7f7f7] p-10 text-center">
+            <div className="mt-12 flex flex-col items-center gap-4 rounded-2xl bg-[#FAFAFA] p-10 text-center">
               <h3 className="font-heading text-2xl font-medium tracking-tight">
                 Interested in the {project.title}?
               </h3>
@@ -216,19 +210,13 @@ export default async function WorkDetailPage({
                     href={`/works/${related.slug}`}
                     className="group"
                   >
-                    <div className="relative aspect-[5/3] overflow-hidden rounded-2xl">
-                      <Image
-                        src={related.image}
-                        alt={related.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
+                    <div className="relative aspect-[5/3] overflow-hidden rounded-2xl border border-neutral-100">
+                      <ImagePlaceholder label={related.title} className="h-full w-full" />
                     </div>
                     <h4 className="mt-4 font-heading text-xl font-medium tracking-tight">
                       {related.title}
                     </h4>
-                    <p className="mt-1 font-mono text-sm text-neutral-500">
+                    <p className="mt-1 font-heading text-sm text-neutral-500">
                       {related.year}
                     </p>
                   </a>

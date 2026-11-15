@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Navbar } from "@/components/sites/resido/Navbar";
+import { Header } from "@/components/ui/header-2";
 import { Footer } from "@/components/sites/resido/Footer";
 import { LenisWrapper } from "@/components/sites/resido/LenisWrapper";
 import { PillButton } from "@/components/sites/resido/PillButton";
@@ -47,36 +47,21 @@ export default function ContactPage() {
 
   return (
     <LenisWrapper>
-      <Navbar />
+      <Header />
 
       <main>
-        <div className="mx-auto max-w-[1400px] px-6 py-16">
-          {/* Top section: email + phone */}
+        <div className="mx-auto max-w-[1400px] px-6 pt-28 pb-16">
+          {/* Hero */}
           <section className="pt-16 pb-12">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-12">
-              <div>
-                <span className="block font-mono text-xs uppercase tracking-wider text-neutral-400">
-                  Email
-                </span>
-                <a
-                  href="mailto:thermalscientific2021@gmail.com"
-                  className="font-heading text-lg font-medium transition-opacity hover:opacity-70"
-                >
-                  thermalscientific2021@gmail.com
-                </a>
-              </div>
-              <div>
-                <span className="block font-mono text-xs uppercase tracking-wider text-neutral-400">
-                  Phone
-                </span>
-                <a
-                  href="tel:+919952204307"
-                  className="font-heading text-lg font-medium transition-opacity hover:opacity-70"
-                >
-                  +91 9952204307
-                </a>
-              </div>
-            </div>
+            <h1 className="font-heading text-[64px] lg:text-[96px] font-medium tracking-tight leading-none">
+              Get in Touch
+            </h1>
+            <a
+              href="mailto:thermalscientific2021@gmail.com"
+              className="mt-4 block font-heading text-xl lg:text-2xl text-neutral-400 transition-opacity hover:opacity-70"
+            >
+              thermalscientific2021@gmail.com
+            </a>
           </section>
 
           {/* Office cards */}
@@ -122,7 +107,7 @@ export default function ContactPage() {
                 <div>
                   <label
                     htmlFor="name"
-                    className="mb-2 block font-mono text-xs uppercase tracking-wider text-neutral-400"
+                    className="mb-2 block font-heading text-xs uppercase tracking-wider text-neutral-400"
                   >
                     Your Name
                   </label>
@@ -139,7 +124,7 @@ export default function ContactPage() {
                 <div>
                   <label
                     htmlFor="email"
-                    className="mb-2 block font-mono text-xs uppercase tracking-wider text-neutral-400"
+                    className="mb-2 block font-heading text-xs uppercase tracking-wider text-neutral-400"
                   >
                     Email
                   </label>
@@ -156,7 +141,7 @@ export default function ContactPage() {
                 <div>
                   <label
                     htmlFor="details"
-                    className="mb-2 block font-mono text-xs uppercase tracking-wider text-neutral-400"
+                    className="mb-2 block font-heading text-xs uppercase tracking-wider text-neutral-400"
                   >
                     Equipment Requirement
                   </label>

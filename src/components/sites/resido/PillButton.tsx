@@ -24,8 +24,8 @@ export function PillButton({
     "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-heading text-[15px] font-medium tracking-tight";
 
   const variants: Record<Variant, string> = {
-    primary: "bg-black text-white",
-    secondary: "bg-white text-black",
+    primary: "bg-[#2F6BFF] text-white",
+    secondary: "bg-white text-[#13171B]",
     tertiary: "bg-white/20 text-white",
   };
 

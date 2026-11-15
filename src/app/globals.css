@@ -7,12 +7,25 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-switzer), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-fragment-mono), ui-monospace, monospace;
-  --color-teal: oklch(0.52 0.12 210);
-  --color-teal-dark: oklch(0.48 0.12 210);
+  --color-teal: #2F6BFF;
+  --color-teal-dark: #2558D4;
   --color-divider: oklch(0.76 0 0);
   --color-light-gray: oklch(0.97 0 0);
   --color-card: oklch(1 0 0);
-  --color-card-foreground: oklch(0.145 0 0);
+  --color-card-foreground: #13171B;
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.625rem;
@@ -21,8 +34,21 @@
 }
 
 :root {
-  --background: oklch(0.975 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: #FAFAFA;
+  --foreground: #13171B;
+  --primary: #2F6BFF;
+  --primary-foreground: #FAFAFA;
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: #13171B;
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: #13171B;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: #FAFAFA;
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: #2F6BFF;
 }
 
 @layer base {

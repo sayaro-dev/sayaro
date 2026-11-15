@@ -42,6 +42,11 @@ export const metadata: Metadata = {
   title: "Sayaro | Laboratory & Scientific Equipment",
   description:
     "Explore laboratory and scientific equipment from Sayaro — autoclaves, incubators, furnaces, fume hoods, laminar flow systems, and water baths for research, pharmaceutical, industrial, and educational laboratories.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+  },
 };
 
 export default function RootLayout({

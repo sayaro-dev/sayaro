@@ -1,12 +1,12 @@
 import { LenisWrapper } from "@/components/sites/resido/LenisWrapper";
-import { Navbar } from "@/components/sites/resido/Navbar";
+import { Header } from "@/components/ui/header-2";
 import { Footer } from "@/components/sites/resido/Footer";
 
 export default function PrivacyPolicyPage() {
   return (
     <LenisWrapper>
-      <Navbar />
-      <main className="max-w-3xl mx-auto px-6 py-20">
+      <Header />
+      <main className="max-w-3xl mx-auto px-6 pt-28 pb-20">
         <h1 className="font-heading text-[36px] lg:text-[48px] font-medium tracking-tight">
           Privacy Policy
         </h1>

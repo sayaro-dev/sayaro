@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AvatarStack } from "@/components/sites/resido/AvatarStack";
 
 const brands = [
   "Sterilization",
@@ -13,26 +12,9 @@ const brands = [
 
 export function TrustMarquee() {
   return (
-    <section className="bg-white py-6 border-y border-divider">
+    <section className="bg-white py-6 mt-6 border-y border-divider">
       <div className="mx-auto max-w-[1400px] px-6">
         {/* Top row */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }}
-        >
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="font-sans text-sm text-neutral-500">
-              Trusted by laboratories across India
-            </span>
-            <AvatarStack size={28} />
-            <span className="font-sans text-sm text-neutral-500">
-              Serving research, pharma &amp; industrial labs
-            </span>
-          </div>
-        </motion.div>
-
         {/* Logo marquee */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}
@@ -41,14 +23,18 @@ export function TrustMarquee() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as const, delay: 0.15 }}
         >
           <div className="overflow-hidden">
-            <div className="flex w-max gap-12 animate-marquee">
-              {[...brands, ...brands].map((name, i) => (
-                <span
-                  key={i}
-                  className="font-heading font-medium text-xl text-neutral-300 whitespace-nowrap"
-                >
-                  {name}
-                </span>
+            <div className="flex animate-marquee">
+              {[0, 1].map((set) => (
+                <div key={set} className="flex shrink-0 gap-12 pr-12">
+                  {brands.map((name) => (
+                    <span
+                      key={name}
+                      className="font-heading font-medium text-xl text-[#13171B] whitespace-nowrap"
+                    >
+                      {name}
+                    </span>
+                  ))}
+                </div>
               ))}
             </div>
           </div>

@@ -22,9 +22,9 @@ const fadeUp = {
 
 export function Hero() {
   return (
-    <section className="w-full bg-[#f7f7f7] px-4 pt-4 lg:px-6 lg:pt-6">
+    <section className="w-full bg-[#FAFAFA] px-4 pt-4 lg:px-6 lg:pt-6">
       <div
-        className="relative mx-auto max-w-[1400px] overflow-hidden rounded-[24px] bg-[#047E9F]"
+        className="relative mx-auto max-w-[1400px] overflow-hidden rounded-[24px] bg-[#2F6BFF]"
         style={{ minHeight: 600 }}
       >
         {/* Hero background image with slow zoom */}
@@ -48,47 +48,50 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
         {/* Content */}
-        <div className="relative flex min-h-[600px] flex-col justify-end p-6 pb-8 lg:h-[calc(100vh-120px)] lg:p-12 lg:pb-12">
+        <div className="relative flex min-h-[600px] flex-col justify-center p-8 lg:h-[calc(100vh-120px)] lg:p-16">
           <motion.div
             className="max-w-[720px]"
             variants={stagger}
             initial="hidden"
             animate="visible"
           >
+            <motion.div variants={fadeUp} className="flex items-center gap-2 mb-6">
+              <span className="size-2.5 rounded-full bg-white" />
+              <span className="text-sm text-white/80">Now accepting equipment enquiries</span>
+            </motion.div>
+
             <motion.h1
               variants={fadeUp}
-              className="font-heading text-[36px] font-medium leading-[1.12] tracking-[-0.04em] text-white lg:text-[64px]"
+              className="font-heading text-[40px] font-medium leading-[1.08] tracking-[-0.04em] text-white lg:text-[72px]"
             >
-              Precision Equipment for
+              Built with Precision.
               <br />
-              Laboratory Applications.
+              Designed with Purpose.
             </motion.h1>
 
             <motion.p
               variants={fadeUp}
-              className="mt-5 max-w-[540px] text-base leading-relaxed text-white/80 lg:text-lg"
+              className="mt-6 max-w-[540px] text-base leading-relaxed text-white/70 lg:text-lg"
             >
-              Explore scientific and laboratory equipment from Sayaro —
-              sterilization, incubation, thermal processing, airflow systems,
-              and temperature-controlled baths for research, pharma, and
-              industrial laboratories.
+              Sterilization, incubation, thermal processing, and laboratory
+              safety equipment built for precision, reliability, and lasting
+              performance.
             </motion.p>
 
             <motion.div
               variants={fadeUp}
               className="mt-8 flex flex-wrap items-center gap-3"
             >
-              <PillButton href="/works" variant="secondary">
-                Explore Our Products
+              <PillButton href="/contact" variant="secondary">
+                Start Your Enquiry
                 <span className="ml-1 text-lg leading-none">&rsaquo;</span>
               </PillButton>
 
-              <PillButton href="/contact" variant="tertiary">
-                Request a Quote
+              <PillButton href="/works" variant="tertiary">
+                View Our Products
               </PillButton>
             </motion.div>
           </motion.div>
-
         </div>
       </div>
     </section>

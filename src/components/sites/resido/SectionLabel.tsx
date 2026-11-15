@@ -10,7 +10,7 @@ export function SectionLabel({
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-2 font-mono text-sm tracking-tight",
+        "inline-flex items-center gap-2 font-heading text-sm tracking-tight",
         className
       )}
     >

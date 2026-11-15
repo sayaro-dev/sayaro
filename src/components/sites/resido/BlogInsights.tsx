@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { SectionLabel } from "./SectionLabel";
+import { ImagePlaceholder } from "./ImagePlaceholder";
 
 const staggerContainer = {
   hidden: {},
@@ -64,7 +64,6 @@ export function BlogInsights() {
         >
           <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <SectionLabel className="mb-4">Blog</SectionLabel>
               <h2 className="font-heading text-[48px] font-medium tracking-[-0.04em] lg:text-[60px]">
                 Insights
               </h2>
@@ -93,16 +92,11 @@ export function BlogInsights() {
               variants={staggerItem}
               whileHover={cardHover}
             >
-              <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+              <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-neutral-100">
+                <ImagePlaceholder label={post.title} className="h-full w-full" />
               </div>
               <div className="mt-4">
-                <span className="font-mono text-xs text-neutral-400">
+                <span className="font-heading text-xs text-neutral-400">
                   {post.readTime}
                 </span>
                 <h4 className="mt-2 font-heading text-lg font-medium tracking-tight">

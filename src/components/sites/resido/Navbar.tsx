@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { label: "Products", href: "/works" },
+  { label: "About", href: "/about" },
   { label: "Why Sayaro", href: "/#why-sayaro" },
   { label: "Contact", href: "/contact" },
 ];
@@ -14,6 +15,7 @@ const navLinks = [
 const panelLinks = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/works" },
+  { label: "About", href: "/about" },
   { label: "Why Sayaro", href: "/#why-sayaro" },
   { label: "Contact", href: "/contact" },
 ];
@@ -93,19 +95,19 @@ export function Navbar() {
         >
           <span
             className={cn(
-              "block h-[2px] w-6 bg-black transition-transform duration-300",
+              "block h-[2px] w-6 bg-[#13171B] transition-transform duration-300",
               menuOpen && "translate-y-[7px] rotate-45"
             )}
           />
           <span
             className={cn(
-              "block h-[2px] w-6 bg-black transition-opacity duration-300",
+              "block h-[2px] w-6 bg-[#13171B] transition-opacity duration-300",
               menuOpen && "opacity-0"
             )}
           />
           <span
             className={cn(
-              "block h-[2px] w-6 bg-black transition-transform duration-300",
+              "block h-[2px] w-6 bg-[#13171B] transition-transform duration-300",
               menuOpen && "-translate-y-[7px] -rotate-45"
             )}
           />
@@ -149,7 +151,7 @@ export function Navbar() {
                     placeholder="you@company.com"
                     className="rounded-full border border-neutral-200 px-5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-black/10 w-[220px]"
                   />
-                  <button className="rounded-full bg-black px-5 py-2.5 text-sm font-heading font-medium text-white hover:opacity-80 transition-opacity">
+                  <button className="rounded-full bg-[#2F6BFF] px-5 py-2.5 text-sm font-heading font-medium text-white hover:opacity-80 transition-opacity">
                     Subscribe
                   </button>
                 </div>
