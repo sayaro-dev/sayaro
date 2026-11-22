@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { SectionLabel } from "./SectionLabel";
 import { PillButton } from "./PillButton";
 import { AvatarStack } from "./AvatarStack";
+import { urlFor } from "@/lib/sanity";
 
 function Stars({ count, color = "text-orange-400" }: { count: number; color?: string }) {
   return (
@@ -19,39 +20,26 @@ function Stars({ count, color = "text-orange-400" }: { count: number; color?: st
   );
 }
 
-const reviews = [
-  {
-    name: "Dr. Ramesh K.",
-    role: "Research Lab Director",
-    text: "Sayaro provided the right autoclave configuration for our microbiology department. The equipment has been running reliably since installation. Good technical support throughout.",
-    avatar: "/sites/resido/images/avatar-testimonial.jpg",
-    stars: 5,
-    starColor: "text-orange-400",
-    brand: null,
-  },
-  {
-    name: "Priya Nair",
-    role: "QC Head, Pharma",
-    text: "We sourced BOD incubators and hot air ovens from Sayaro for our QC lab. Equipment delivered on time and configured to our temperature and capacity requirements.",
-    avatar: "/sites/resido/images/avatar-2.jpg",
-    stars: 5,
-    starColor: "text-orange-400",
-    brand: null,
-  },
-  {
-    name: "Prof. Suresh M.",
-    role: "University Lab Manager",
-    text: "Equipped our entire undergraduate chemistry lab through Sayaro — fume hoods, water baths, and muffle furnaces. Straightforward process and responsive team.",
-    avatar: "/sites/resido/images/avatar-testimonial.jpg",
-    stars: 4,
-    starColor: "text-orange-400",
-    brand: null,
-  },
-];
+interface Testimonial {
+  _id: string;
+  name: string;
+  role: string;
+  company?: string;
+  quote: string;
+  image?: any;
+  rating?: number;
+}
 
-const allReviews = [...reviews, ...reviews, ...reviews];
+interface TestimonialsProps {
+  testimonials: Testimonial[];
+}
 
-export function Testimonials() {
+export function Testimonials({ testimonials }: TestimonialsProps) {
+  // Only duplicate testimonials for carousel effect if we have 4+ items
+  // Otherwise it looks like duplicate entries in CMS
+  const allReviews = testimonials.length >= 4
+    ? [...testimonials, ...testimonials, ...testimonials]
+    : testimonials;
   const scrollRef = useRef<HTMLDivElement>(null);
 
   function scroll(direction: "prev" | "next") {
@@ -144,36 +132,43 @@ export function Testimonials() {
           >
             {allReviews.map((review, i) => (
               <div
-                key={i}
+                key={`${review._id}-${i}`}
                 data-review
                 className="shrink-0 snap-start rounded-2xl bg-white p-8 flex flex-col justify-between"
                 style={{ width: "min(380px, 75vw)" }}
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <Stars count={review.stars} color={review.starColor} />
-                    {review.brand && (
+                    <Stars count={review.rating || 5} color="text-orange-400" />
+                    {review.company && (
                       <span className="text-xs text-neutral-400 font-heading">
-                        {review.brand}
+                        {review.company}
                       </span>
                     )}
                   </div>
                   <p className="mt-6 text-[15px] leading-relaxed text-neutral-700">
-                    {review.text}
+                    {review.quote}
                   </p>
                 </div>
 
                 <div className="mt-8 flex items-center gap-3">
-                  <Image
-                    src={review.avatar}
-                    alt={review.name}
-                    width={44}
-                    height={44}
-                    className="rounded-full object-cover"
-                  />
+                  {review.image ? (
+                    <Image
+                      src={urlFor(review.image).width(88).height(88).url()}
+                      alt={review.name}
+                      width={44}
+                      height={44}
+                      className="rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="size-11 rounded-full bg-neutral-200" />
+                  )}
                   <div>
                     <p className="text-sm font-medium">{review.name}</p>
-                    <p className="text-xs text-neutral-500">{review.role}</p>
+                    <p className="text-xs text-neutral-500">
+                      {review.role}
+                      {review.company && `, ${review.company}`}
+                    </p>
                   </div>
                 </div>
               </div>

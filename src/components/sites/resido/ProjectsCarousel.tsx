@@ -1,27 +1,30 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { SectionLabel } from "./SectionLabel";
-import { ImagePlaceholder } from "./ImagePlaceholder";
-import { projects as allProductData } from "./data";
+import { urlFor } from "@/lib/sanity";
 
-const FEATURED_SLUGS = [
-  "vertical-autoclave",
-  "bod-incubator",
-  "muffle-furnace-1200c",
-  "laminar-flow-cabinet",
-  "constant-temperature-water-bath",
-  "co2-incubator",
-];
+interface Product {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  category: string;
+  image?: any;
+  overview?: string;
+}
 
-const featuredProducts = FEATURED_SLUGS.map(
-  (slug) => allProductData.find((p) => p.slug === slug)!
-);
+interface ProjectsCarouselProps {
+  products: Product[];
+}
 
-const allProjects = [...featuredProducts, ...featuredProducts];
-
-export function ProjectsCarousel() {
+export function ProjectsCarousel({ products }: ProjectsCarouselProps) {
+  // Only duplicate products for carousel effect if we have 4+ items
+  // Otherwise it looks like duplicate entries in CMS
+  const allProjects = products.length >= 4
+    ? [...products, ...products]
+    : products;
   const scrollRef = useRef<HTMLDivElement>(null);
 
   function scroll(direction: "prev" | "next") {
@@ -88,8 +91,8 @@ export function ProjectsCarousel() {
           >
             {allProjects.map((project, i) => (
               <a
-                key={i}
-                href={`/works/${project.slug}`}
+                key={`${project._id}-${i}`}
+                href={`/works/${project.slug.current}`}
                 className="group shrink-0 snap-start"
                 style={{ width: "min(520px, 80vw)" }}
               >
@@ -101,7 +104,18 @@ export function ProjectsCarousel() {
                     <span className="size-[7px] rounded-full bg-neutral-700" />
                   </div>
                   <div className="relative aspect-[5/4] overflow-hidden rounded-xl">
-                    <ImagePlaceholder label={project.title} className="h-full w-full" />
+                    {project.image ? (
+                      <Image
+                        src={urlFor(project.image).width(520).height(416).url()}
+                        alt={project.title}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-neutral-100 text-neutral-400">
+                        {project.title}
+                      </div>
+                    )}
                   </div>
                 </div>
                 {/* Title + meta below card */}
@@ -110,7 +124,7 @@ export function ProjectsCarousel() {
                     {project.title}
                   </h4>
                   <p className="mt-1 font-heading text-sm text-neutral-500">
-                    {project.year} · {project.location}
+                    {project.category}
                   </p>
                 </div>
               </a>

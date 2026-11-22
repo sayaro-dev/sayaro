@@ -1,17 +1,18 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Header } from "@/components/ui/header-2";
 import { Footer } from "@/components/sites/resido/Footer";
 import { LenisWrapper } from "@/components/sites/resido/LenisWrapper";
 import { PageHero } from "@/components/sites/resido/PageHero";
 import { PillButton } from "@/components/sites/resido/PillButton";
 import { LetsBuildTogether } from "@/components/sites/resido/LetsBuildTogether";
-import { ImagePlaceholder } from "@/components/sites/resido/ImagePlaceholder";
-import { projects } from "@/components/sites/resido/data";
-import { industries } from "@/components/sites/resido/industries";
+import { client, urlFor } from "@/lib/sanity";
+import { industryQuery, productsByIndustryQuery } from "@/lib/sanity-queries";
 
 export async function generateStaticParams() {
-  return industries.map((ind) => ({ slug: ind.slug }));
+  const industries = await client.fetch(`*[_type == "industry"] { slug }`);
+  return industries.map((ind: any) => ({ slug: ind.slug.current }));
 }
 
 export default async function IndustryPage({
@@ -20,12 +21,10 @@ export default async function IndustryPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const industry = industries.find((i) => i.slug === slug);
+  const industry = await client.fetch(industryQuery, { slug });
   if (!industry) notFound();
 
-  const relevantProducts = projects.filter((p) =>
-    industry.categories.includes(p.category)
-  );
+  const relevantProducts = await client.fetch(productsByIndustryQuery, { slug });
 
   return (
     <LenisWrapper>
@@ -56,10 +55,10 @@ export default async function IndustryPage({
             </div>
 
             <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {relevantProducts.map((product) => (
+              {relevantProducts.map((product: any) => (
                 <Link
-                  key={product.slug}
-                  href={`/works/${product.slug}`}
+                  key={product._id}
+                  href={`/works/${product.slug.current}`}
                   className="group block rounded-[15px] bg-white p-2 border border-neutral-100 shadow-[0_1px_3px_0_rgba(0,0,0,0.04)] transition-shadow duration-300 hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.08)]"
                 >
                   <div className="flex gap-1.5 px-2 pt-2 pb-3">
@@ -68,20 +67,28 @@ export default async function IndustryPage({
                     <span className="size-[7px] rounded-full bg-neutral-700" />
                   </div>
                   <div className="relative aspect-[5/4] overflow-hidden rounded-xl">
-                    <ImagePlaceholder
-                      label={product.title}
-                      className="h-full w-full"
-                    />
+                    {product.image ? (
+                      <Image
+                        src={urlFor(product.image).width(400).height(320).url()}
+                        alt={product.title}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-neutral-100 text-neutral-400">
+                        {product.title}
+                      </div>
+                    )}
                   </div>
                   <div className="px-2 pt-5 pb-3">
                     <h4 className="font-heading text-lg font-medium tracking-tight">
                       {product.title}
                     </h4>
                     <p className="mt-1.5 text-sm text-neutral-500">
-                      {product.year} · {product.location}
+                      {product.category}
                     </p>
                     <p className="mt-3 text-[14px] leading-relaxed text-neutral-400 line-clamp-2">
-                      {product.description}
+                      {product.overview}
                     </p>
                   </div>
                 </Link>

@@ -11,8 +11,16 @@ import { FAQ } from "@/components/sites/resido/FAQ";
 import { ContactCTA } from "@/components/sites/resido/ContactCTA";
 import { LetsBuildTogether } from "@/components/sites/resido/LetsBuildTogether";
 import { Footer } from "@/components/sites/resido/Footer";
+import { client } from "@/lib/sanity";
+import { featuredProductsQuery, testimonialsQuery, faqsQuery, servicesQuery } from "@/lib/sanity-queries";
 
-export default function Home() {
+export default async function Home() {
+  const [featuredProducts, testimonials, faqs, services] = await Promise.all([
+    client.fetch(featuredProductsQuery),
+    client.fetch(testimonialsQuery),
+    client.fetch(faqsQuery),
+    client.fetch(servicesQuery),
+  ]);
   return (
     <LenisWrapper>
       <Header />
@@ -20,11 +28,11 @@ export default function Home() {
         <Hero />
         <TrustMarquee />
         <AboutBlock />
-        <ProjectsCarousel />
-        <Services />
+        <ProjectsCarousel products={featuredProducts} />
+        <Services services={services} />
         <WhyChooseUs />
-        <Testimonials />
-        <FAQ />
+        <Testimonials testimonials={testimonials} />
+        <FAQ faqs={faqs} />
         <ContactCTA />
         <LetsBuildTogether />
       </main>

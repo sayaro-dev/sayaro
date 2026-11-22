@@ -1,14 +1,14 @@
-"use client";
-
 import { Header } from "@/components/ui/header-2";
 import { Footer } from "@/components/sites/resido/Footer";
 import { LenisWrapper } from "@/components/sites/resido/LenisWrapper";
 import { PillButton } from "@/components/sites/resido/PillButton";
 import { LetsBuildTogether } from "@/components/sites/resido/LetsBuildTogether";
 import { CarouselStacked } from "@/components/ui/carousel-stacked";
-import { industries } from "@/components/sites/resido/industries";
+import { client } from "@/lib/sanity";
+import { industriesQuery } from "@/lib/sanity-queries";
 
-export default function WorksPage() {
+export default async function WorksPage() {
+  const industries = await client.fetch(industriesQuery);
   return (
     <LenisWrapper>
       <Header />

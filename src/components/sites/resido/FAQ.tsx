@@ -4,33 +4,16 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PillButton } from "./PillButton";
 
-const faqs = [
-  {
-    question: "How do I enquire about a product?",
-    answer:
-      "Select the relevant product category and share your application, required capacity, operating range, and quantity through the enquiry form. Our team will review and follow up.",
-  },
-  {
-    question: "Can I request a specific capacity or configuration?",
-    answer:
-      "Yes. Share your required dimensions, capacity, and operating conditions. The Sayaro team can confirm which options are available for the selected product.",
-  },
-  {
-    question: "Can I request product specifications or datasheets?",
-    answer:
-      "Yes. Mention the product or model in your enquiry and request the relevant technical details or datasheet. We will share available specification documents.",
-  },
-  {
-    question: "Do you support installation?",
-    answer:
-      "Contact the team for details on installation, commissioning, and after-sales support scope for your specific equipment and location.",
-  },
-  {
-    question: "What is the typical lead time for equipment?",
-    answer:
-      "Lead times vary by product and configuration. Standard models typically ship within 2–4 weeks. Custom configurations may require 4–8 weeks. We confirm timelines at the time of order.",
-  },
-];
+interface FAQ {
+  _id: string;
+  question: string;
+  answer: string;
+  category?: string;
+}
+
+interface FAQProps {
+  faqs?: FAQ[];
+}
 
 const staggerContainer = {
   hidden: {},
@@ -46,8 +29,12 @@ const staggerItem = {
   },
 };
 
-export function FAQ() {
+export function FAQ({ faqs = [] }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  if (faqs.length === 0) {
+    return null;
+  }
 
   return (
     <section className="py-20">
@@ -100,7 +87,7 @@ export function FAQ() {
             const isOpen = openIndex === index;
             return (
               <motion.div
-                key={index}
+                key={faq._id}
                 variants={staggerItem}
                 className="mb-3 rounded-2xl bg-white"
               >

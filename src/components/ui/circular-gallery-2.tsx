@@ -299,7 +299,7 @@ class Media {
         uPlaneSizes: { value: [0, 0] },
         uImageSizes: { value: [0, 0] },
         uSpeed: { value: 0 },
-        uTime: { value: 100 * Math.random() },
+        uTime: { value: 0 },
         uBorderRadius: { value: this.borderRadius },
       },
       transparent: true,

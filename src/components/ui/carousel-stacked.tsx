@@ -14,6 +14,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import type { Industry } from "@/components/sites/resido/industries";
+import { urlFor } from "@/lib/sanity";
 
 interface CarouselConfig {
   distanceDivisor: number;
@@ -129,17 +130,20 @@ export function CarouselStacked({ industries, className }: CarouselStackedProps)
           className="absolute inset-0 z-50 cursor-grab active:cursor-grabbing"
         />
 
-        {industries.map((industry, i) => (
-          <IndustryCard
-            key={industry.slug}
-            industry={industry}
-            index={i}
-            total={total}
-            progress={scrollProgress}
-            config={config}
-            isDragging={isDragging}
-          />
-        ))}
+        {industries.map((industry, i) => {
+          const slug = typeof industry.slug === 'string' ? industry.slug : industry.slug.current;
+          return (
+            <IndustryCard
+              key={slug}
+              industry={industry}
+              index={i}
+              total={total}
+              progress={scrollProgress}
+              config={config}
+              isDragging={isDragging}
+            />
+          );
+        })}
       </div>
     </div>
   );
@@ -186,7 +190,12 @@ function IndustryCard({ industry, index, total, progress, config, isDragging }: 
     Math.round(100 - Math.abs(o) * 10),
   );
 
-  const badgeLabel = industry.categories[0] ?? industry.sector;
+  const categories = industry.relevantCategories || industry.categories || [];
+  const badgeLabel = categories[0] ?? industry.sector;
+  const slug = typeof industry.slug === 'string' ? industry.slug : industry.slug.current;
+  const imageUrl = typeof industry.image === 'string'
+    ? industry.image
+    : urlFor(industry.image).width(600).height(800).url();
 
   return (
     <motion.div
@@ -197,12 +206,12 @@ function IndustryCard({ industry, index, total, progress, config, isDragging }: 
       )}
     >
       <Link
-        href={`/works/industry/${industry.slug}`}
+        href={`/works/industry/${slug}`}
         className="block w-full h-full"
         onClick={(e) => { if (isDragging.current) e.preventDefault(); }}
       >
         <Image
-          src={industry.image}
+          src={imageUrl}
           alt={industry.sector}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-110"
