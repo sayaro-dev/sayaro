@@ -9,8 +9,8 @@ export const productsQuery = `*[_type == "product"] | order(featured desc, title
   _id,
   title,
   slug,
-  category,
-  image,
+  "category": category->{_id, sector, slug},
+  imageUrl,
   featured,
   overview,
   specifications,
@@ -24,8 +24,8 @@ export const productQuery = `*[_type == "product" && slug.current == $slug][0] {
   _id,
   title,
   slug,
-  category,
-  image,
+  "category": category->{_id, sector, slug},
+  imageUrl,
   featured,
   overview,
   specifications,
@@ -43,18 +43,18 @@ export const featuredProductsQuery = `*[_type == "product" && featured == true] 
   _id,
   title,
   slug,
-  category,
-  image,
+  "category": category->{_id, sector, slug},
+  imageUrl,
   overview
 }`
 
-// Get products by category
-export const productsByCategoryQuery = `*[_type == "product" && category == $category] | order(title asc) {
+// Get products by industry (used for related products)
+export const productsByIndustryRefQuery = `*[_type == "product" && category._ref == $industryId] | order(title asc) {
   _id,
   title,
   slug,
-  category,
-  image,
+  "category": category->{_id, sector, slug},
+  imageUrl,
   overview
 }`
 
@@ -63,8 +63,8 @@ export const productsByIndustryQuery = `*[_type == "product" && references(*[_ty
   _id,
   title,
   slug,
-  category,
-  image,
+  "category": category->{_id, sector, slug},
+  imageUrl,
   overview
 }`
 
@@ -78,8 +78,7 @@ export const industriesQuery = `*[_type == "industry"] | order(sector asc) {
   sector,
   slug,
   description,
-  image,
-  relevantCategories
+  imageUrl
 }`
 
 // Get single industry by slug
@@ -88,49 +87,7 @@ export const industryQuery = `*[_type == "industry" && slug.current == $slug][0]
   sector,
   slug,
   description,
-  image,
-  relevantCategories
-}`
-
-// ============================================
-// BLOG POSTS
-// ============================================
-
-// Get all blog posts
-export const postsQuery = `*[_type == "post"] | order(date desc) {
-  _id,
-  title,
-  slug,
-  excerpt,
-  coverImage,
-  date,
-  author,
-  category
-}`
-
-// Get single blog post by slug
-export const postQuery = `*[_type == "post" && slug.current == $slug][0] {
-  _id,
-  title,
-  slug,
-  excerpt,
-  coverImage,
-  date,
-  author,
-  content,
-  category
-}`
-
-// Get recent blog posts (limit)
-export const recentPostsQuery = `*[_type == "post"] | order(date desc) [0...$limit] {
-  _id,
-  title,
-  slug,
-  excerpt,
-  coverImage,
-  date,
-  author,
-  category
+  imageUrl
 }`
 
 // ============================================
@@ -143,7 +100,7 @@ export const testimonialsQuery = `*[_type == "testimonial"] | order(order asc) {
   name,
   role,
   company,
-  image,
+  imageUrl,
   quote,
   rating,
   order
@@ -158,16 +115,6 @@ export const faqsQuery = `*[_type == "faq"] | order(order asc) {
   _id,
   question,
   answer,
-  category,
-  order
-}`
-
-// Get FAQs by category
-export const faqsByCategoryQuery = `*[_type == "faq" && category == $category] | order(order asc) {
-  _id,
-  question,
-  answer,
-  category,
   order
 }`
 
@@ -180,20 +127,5 @@ export const servicesQuery = `*[_type == "service"] | order(order asc) {
   _id,
   title,
   description,
-  icon,
   order
-}`
-
-// ============================================
-// CONTACT INFO
-// ============================================
-
-// Get contact information (singleton)
-export const contactInfoQuery = `*[_type == "contactInfo"][0] {
-  _id,
-  officeAddress,
-  phone,
-  email,
-  socialLinks,
-  offices
 }`

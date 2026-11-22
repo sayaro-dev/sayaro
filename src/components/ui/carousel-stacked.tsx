@@ -14,7 +14,6 @@ import {
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import type { Industry } from "@/components/sites/resido/industries";
-import { urlFor } from "@/lib/sanity";
 
 interface CarouselConfig {
   distanceDivisor: number;
@@ -190,12 +189,9 @@ function IndustryCard({ industry, index, total, progress, config, isDragging }: 
     Math.round(100 - Math.abs(o) * 10),
   );
 
-  const categories = industry.relevantCategories || industry.categories || [];
-  const badgeLabel = categories[0] ?? industry.sector;
+  const badgeLabel = industry.sector;
   const slug = typeof industry.slug === 'string' ? industry.slug : industry.slug.current;
-  const imageUrl = typeof industry.image === 'string'
-    ? industry.image
-    : urlFor(industry.image).width(600).height(800).url();
+  const imageUrl = industry.imageUrl || '';
 
   return (
     <motion.div
@@ -210,13 +206,19 @@ function IndustryCard({ industry, index, total, progress, config, isDragging }: 
         className="block w-full h-full"
         onClick={(e) => { if (isDragging.current) e.preventDefault(); }}
       >
-        <Image
-          src={imageUrl}
-          alt={industry.sector}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
-          sizes="(max-width: 640px) 192px, (max-width: 1024px) 256px, 288px"
-        />
+        {imageUrl ? (
+          <Image
+            src={imageUrl}
+            alt={industry.sector}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+            sizes="(max-width: 640px) 192px, (max-width: 1024px) 256px, 288px"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-neutral-200 text-neutral-500 text-sm font-heading">
+            {industry.sector}
+          </div>
+        )}
 
         <motion.div
           style={{

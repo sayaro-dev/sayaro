@@ -1,20 +1,5 @@
 // TypeScript types for Sanity CMS data
 
-// Base Sanity types
-export interface SanityImage {
-  _type: 'image'
-  asset: {
-    _ref: string
-    _type: 'reference'
-  }
-  hotspot?: {
-    x: number
-    y: number
-    height: number
-    width: number
-  }
-}
-
 export interface Slug {
   _type: 'slug'
   current: string
@@ -26,8 +11,8 @@ export interface Product {
   _type: 'product'
   title: string
   slug: Slug
-  category: string
-  image: SanityImage
+  category: { _id: string; sector: string; slug: Slug }
+  imageUrl: string
   featured: boolean
   overview?: string
   specifications?: Array<{
@@ -46,22 +31,7 @@ export interface Industry {
   sector: string
   slug: Slug
   description?: string
-  image?: SanityImage
-  relevantCategories?: string[]
-}
-
-// Blog Post
-export interface BlogPost {
-  _id: string
-  _type: 'post'
-  title: string
-  slug: Slug
-  excerpt?: string
-  coverImage: SanityImage
-  date: string
-  author?: string
-  content?: any[] // Portable Text content
-  category?: string
+  imageUrl?: string
 }
 
 // Testimonial
@@ -71,7 +41,7 @@ export interface Testimonial {
   name: string
   role?: string
   company?: string
-  image?: SanityImage
+  imageUrl?: string
   quote: string
   rating: number
   order: number
@@ -83,7 +53,6 @@ export interface FAQ {
   _type: 'faq'
   question: string
   answer: string
-  category?: string
   order: number
 }
 
@@ -93,25 +62,6 @@ export interface Service {
   _type: 'service'
   title: string
   description?: string
-  icon?: string
   order: number
 }
 
-// Contact Info
-export interface ContactInfo {
-  _id: string
-  _type: 'contactInfo'
-  officeAddress?: string
-  phone?: string
-  email?: string
-  socialLinks?: Array<{
-    platform: string
-    url: string
-  }>
-  offices?: Array<{
-    name: string
-    address: string
-    phone?: string
-    email?: string
-  }>
-}

@@ -33,13 +33,14 @@
     "sanity": "node load-env.js",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "check": "npm run lint && npm run typecheck && npm run build"
+    "check": "npm run lint && npm run typecheck && npm run build",
+    "migrate:r2": "npx tsx scripts/migrate-images-to-r2.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1175.0",
     "@base-ui/react": "^1.3.0",
     "@sanity/client": "^8.16.0",
-    "@sanity/image-url": "^2.2.0",
-    "@sanity/vision": "^6.23.0",
+    "@sanity/vision": "^6.24.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^14.9.1",
@@ -50,7 +51,7 @@
     "ogl": "^1.0.11",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "sanity": "^6.23.0",
+    "sanity": "^6.24.0",
     "shadcn": "^4.1.0",
     "styled-components": "^6.6.0",
     "tailwind-merge": "^3.5.0",

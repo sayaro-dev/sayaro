@@ -7,6 +7,8 @@ import { CarouselStacked } from "@/components/ui/carousel-stacked";
 import { client } from "@/lib/sanity";
 import { industriesQuery } from "@/lib/sanity-queries";
 
+export const revalidate = 60;
+
 export default async function WorksPage() {
   const industries = await client.fetch(industriesQuery);
   return (

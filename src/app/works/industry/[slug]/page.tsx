@@ -7,8 +7,11 @@ import { LenisWrapper } from "@/components/sites/resido/LenisWrapper";
 import { PageHero } from "@/components/sites/resido/PageHero";
 import { PillButton } from "@/components/sites/resido/PillButton";
 import { LetsBuildTogether } from "@/components/sites/resido/LetsBuildTogether";
-import { client, urlFor } from "@/lib/sanity";
+import { client } from "@/lib/sanity";
 import { industryQuery, productsByIndustryQuery } from "@/lib/sanity-queries";
+
+export const revalidate = 60;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const industries = await client.fetch(`*[_type == "industry"] { slug }`);
@@ -67,9 +70,9 @@ export default async function IndustryPage({
                     <span className="size-[7px] rounded-full bg-neutral-700" />
                   </div>
                   <div className="relative aspect-[5/4] overflow-hidden rounded-xl">
-                    {product.image ? (
+                    {product.imageUrl ? (
                       <Image
-                        src={urlFor(product.image).width(400).height(320).url()}
+                        src={product.imageUrl}
                         alt={product.title}
                         fill
                         className="object-cover"
@@ -85,7 +88,7 @@ export default async function IndustryPage({
                       {product.title}
                     </h4>
                     <p className="mt-1.5 text-sm text-neutral-500">
-                      {product.category}
+                      {product.category?.sector}
                     </p>
                     <p className="mt-3 text-[14px] leading-relaxed text-neutral-400 line-clamp-2">
                       {product.overview}

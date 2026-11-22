@@ -19,21 +19,6 @@ export const faq = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'category',
-      title: 'Category',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'General', value: 'general' },
-          { title: 'Products', value: 'products' },
-          { title: 'Services', value: 'services' },
-          { title: 'Technical', value: 'technical' },
-          { title: 'Ordering', value: 'ordering' },
-        ],
-      },
-      description: 'Optional category for grouping FAQs',
-    }),
-    defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',
@@ -44,14 +29,6 @@ export const faq = defineType({
   preview: {
     select: {
       title: 'question',
-      category: 'category',
-    },
-    prepare(selection) {
-      const { title, category } = selection
-      return {
-        title: title,
-        subtitle: category ? `Category: ${category}` : 'No category',
-      }
     },
   },
 })

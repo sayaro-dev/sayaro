@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import { R2ImageInput } from '../components/R2ImageInput'
 
 export const testimonial = defineType({
   name: 'testimonial',
@@ -24,12 +25,10 @@ export const testimonial = defineType({
       description: 'Company or organization name',
     }),
     defineField({
-      name: 'image',
+      name: 'imageUrl',
       title: 'Customer Photo',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      type: 'url',
+      components: { input: R2ImageInput },
     }),
     defineField({
       name: 'quote',
@@ -58,15 +57,13 @@ export const testimonial = defineType({
     select: {
       title: 'name',
       subtitle: 'company',
-      media: 'image',
       rating: 'rating',
     },
     prepare(selection) {
-      const { title, subtitle, media, rating } = selection
+      const { title, subtitle, rating } = selection
       return {
         title: title,
         subtitle: subtitle ? `${subtitle} • ${rating}★` : `${rating}★`,
-        media,
       }
     },
   },

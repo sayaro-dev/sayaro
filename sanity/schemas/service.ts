@@ -19,12 +19,6 @@ export const service = defineType({
       description: 'Brief description of the service',
     }),
     defineField({
-      name: 'icon',
-      title: 'Icon Name',
-      type: 'string',
-      description: 'Icon identifier (e.g., "beaker", "microscope", "flask")',
-    }),
-    defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',
@@ -35,14 +29,6 @@ export const service = defineType({
   preview: {
     select: {
       title: 'title',
-      icon: 'icon',
-    },
-    prepare(selection) {
-      const { title, icon } = selection
-      return {
-        title: title,
-        subtitle: icon ? `Icon: ${icon}` : 'No icon',
-      }
     },
   },
 })

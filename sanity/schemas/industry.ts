@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import { R2ImageInput } from '../components/R2ImageInput'
 
 export const industry = defineType({
   name: 'industry',
@@ -29,34 +30,15 @@ export const industry = defineType({
       description: 'Brief description of this industry sector',
     }),
     defineField({
-      name: 'image',
+      name: 'imageUrl',
       title: 'Industry Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
-      name: 'relevantCategories',
-      title: 'Relevant Product Categories',
-      type: 'array',
-      of: [{ type: 'string' }],
-      options: {
-        list: [
-          { title: 'Sterilization', value: 'Sterilization' },
-          { title: 'Life Science', value: 'Life Science' },
-          { title: 'Thermal & Industrial', value: 'Thermal & Industrial' },
-          { title: 'Safety & Airflow', value: 'Safety & Airflow' },
-          { title: 'Thermal Baths', value: 'Thermal Baths' },
-        ],
-      },
-      description: 'Product categories relevant to this industry',
+      type: 'url',
+      components: { input: R2ImageInput },
     }),
   ],
   preview: {
     select: {
       title: 'sector',
-      media: 'image',
     },
   },
 })

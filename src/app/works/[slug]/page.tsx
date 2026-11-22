@@ -6,8 +6,11 @@ import { Footer } from "@/components/sites/resido/Footer";
 import { LenisWrapper } from "@/components/sites/resido/LenisWrapper";
 import { LetsBuildTogether } from "@/components/sites/resido/LetsBuildTogether";
 import { PillButton } from "@/components/sites/resido/PillButton";
-import { client, urlFor } from "@/lib/sanity";
-import { productQuery, productsByCategoryQuery } from "@/lib/sanity-queries";
+import { client } from "@/lib/sanity";
+import { productQuery, productsByIndustryRefQuery } from "@/lib/sanity-queries";
+
+export const revalidate = 60;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const products = await client.fetch(`*[_type == "product"] { slug }`);
@@ -53,8 +56,8 @@ export default async function WorkDetailPage({
   }
 
   const relatedProducts = await client.fetch(
-    productsByCategoryQuery,
-    { category: product.category }
+    productsByIndustryRefQuery,
+    { industryId: product.category?._id }
   );
 
   const fallbackRelated = relatedProducts
@@ -62,7 +65,7 @@ export default async function WorkDetailPage({
     .slice(0, 2);
 
   const quickFacts = [
-    { label: "Category", value: product.category },
+    { label: "Category", value: product.category?.sector || "—" },
     { label: "Featured", value: product.featured ? "Yes" : "Available" },
   ];
 
@@ -93,7 +96,7 @@ export default async function WorkDetailPage({
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <span className="rounded-full bg-[#2F6BFF] px-4 py-1.5 font-heading text-sm text-white">
-                {product.category}
+                {product.category?.sector}
               </span>
               {product.featured && (
                 <span className="font-heading text-sm text-neutral-400">
@@ -110,9 +113,9 @@ export default async function WorkDetailPage({
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
               {/* Left — Product image */}
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-neutral-100">
-                {product.image ? (
+                {product.imageUrl ? (
                   <Image
-                    src={urlFor(product.image).width(800).height(600).url()}
+                    src={product.imageUrl}
                     alt={product.title}
                     fill
                     className="object-cover"
@@ -235,9 +238,9 @@ export default async function WorkDetailPage({
                       className="group"
                     >
                       <div className="relative aspect-[5/3] overflow-hidden rounded-2xl border border-neutral-100">
-                        {related.image ? (
+                        {related.imageUrl ? (
                           <Image
-                            src={urlFor(related.image).width(600).height(360).url()}
+                            src={related.imageUrl}
                             alt={related.title}
                             fill
                             className="object-cover"
@@ -252,7 +255,7 @@ export default async function WorkDetailPage({
                         {related.title}
                       </h4>
                       <p className="mt-1 font-heading text-sm text-neutral-500">
-                        {related.category}
+                        {related.category?.sector}
                       </p>
                     </Link>
                   ))}

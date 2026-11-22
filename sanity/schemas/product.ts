@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity'
+import { R2ImageInput } from '../components/R2ImageInput'
 
 export const product = defineType({
   name: 'product',
@@ -23,26 +24,17 @@ export const product = defineType({
     }),
     defineField({
       name: 'category',
-      title: 'Category',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Sterilization', value: 'Sterilization' },
-          { title: 'Life Science', value: 'Life Science' },
-          { title: 'Thermal & Industrial', value: 'Thermal & Industrial' },
-          { title: 'Safety & Airflow', value: 'Safety & Airflow' },
-          { title: 'Thermal Baths', value: 'Thermal Baths' },
-        ],
-      },
+      title: 'Category (Industry)',
+      type: 'reference',
+      to: [{ type: 'industry' }],
+      description: 'Primary industry this product belongs to',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'image',
+      name: 'imageUrl',
       title: 'Product Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      type: 'url',
+      components: { input: R2ImageInput },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -119,16 +111,14 @@ export const product = defineType({
   preview: {
     select: {
       title: 'title',
-      category: 'category',
-      media: 'image',
+      category: 'category.sector',
       featured: 'featured',
     },
     prepare(selection) {
-      const { title, category, media, featured } = selection
+      const { title, category, featured } = selection
       return {
         title: title,
-        subtitle: `${category}${featured ? ' • Featured' : ''}`,
-        media,
+        subtitle: `${category || 'No category'}${featured ? ' • Featured' : ''}`,
       }
     },
   },

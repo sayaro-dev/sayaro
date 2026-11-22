@@ -6,8 +6,6 @@ import { motion } from "framer-motion";
 import { SectionLabel } from "./SectionLabel";
 import { PillButton } from "./PillButton";
 import { AvatarStack } from "./AvatarStack";
-import { urlFor } from "@/lib/sanity";
-
 function Stars({ count, color = "text-orange-400" }: { count: number; color?: string }) {
   return (
     <div className="flex gap-0.5">
@@ -26,7 +24,7 @@ interface Testimonial {
   role: string;
   company?: string;
   quote: string;
-  image?: any;
+  imageUrl?: string;
   rating?: number;
 }
 
@@ -152,9 +150,9 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
                 </div>
 
                 <div className="mt-8 flex items-center gap-3">
-                  {review.image ? (
+                  {review.imageUrl ? (
                     <Image
-                      src={urlFor(review.image).width(88).height(88).url()}
+                      src={review.imageUrl}
                       alt={review.name}
                       width={44}
                       height={44}

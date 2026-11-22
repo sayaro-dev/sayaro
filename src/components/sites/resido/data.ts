@@ -16,19 +16,6 @@ export type Project = {
   industry: string;
 };
 
-export type BlogPost = {
-  slug: string;
-  title: string;
-  readTime: string;
-  date: string;
-  author: string;
-  authorRole: string;
-  category: "Sterilization" | "Incubation" | "Laboratory Safety" | "Equipment Guide";
-  excerpt: string;
-  image: string;
-  sections: { heading: string; content: string }[];
-};
-
 const images = {
   a: "/sites/resido/images/project-stonehaven.png",
   b: "/sites/resido/images/project-rivermark.png",
@@ -650,104 +637,5 @@ export const projects: Project[] = [
     scope: "Multiple Capacities",
     timeline: "3–4 weeks",
     industry: "Thermal Baths",
-  },
-];
-
-export const blogPosts: BlogPost[] = [
-  {
-    slug: "understanding-autoclave-sterilization",
-    title: "Understanding Autoclave Sterilization",
-    readTime: "10 min read",
-    date: "April 20, 2026",
-    author: "Sayaro Technical Team",
-    authorRole: "Equipment Specialists",
-    category: "Sterilization",
-    excerpt: "Learn how steam sterilization works, the different autoclave types, and how to choose the right one for your laboratory application.",
-    image: "/sites/resido/images/blog-philosophy.png",
-    sections: [
-      { heading: "How Steam Sterilization Works", content: "Autoclave sterilization uses saturated steam under pressure to destroy microorganisms, spores, and other contaminants. The process typically operates at 121°C and 15 psi for 15–30 minutes, depending on the load. Understanding the relationship between temperature, pressure, and exposure time is essential for selecting the right autoclave and cycle for your application." },
-      { heading: "Choosing Between Vertical and Horizontal Models", content: "Vertical autoclaves are compact and suited for routine laboratory sterilization — glassware, media, and small instruments. Horizontal autoclaves offer larger chamber volumes for hospitals, pharmaceutical plants, and industrial labs processing bulk loads. Double-wall and triple-wall construction options provide improved thermal efficiency and operator safety for heavy-duty applications." },
-      { heading: "Maintenance and Validation", content: "Regular maintenance — including gasket inspection, safety valve testing, and chamber cleaning — extends equipment life and ensures consistent performance. Periodic biological indicator testing validates that sterilization cycles are achieving the required sterility assurance level. A well-maintained autoclave delivers reliable results for years of operation." },
-    ],
-  },
-  {
-    slug: "selecting-the-right-incubator",
-    title: "Selecting the Right Incubator",
-    readTime: "6 min read",
-    date: "March 15, 2026",
-    author: "Sayaro Technical Team",
-    authorRole: "Equipment Specialists",
-    category: "Incubation",
-    excerpt: "Bacteriological, BOD, CO₂ — each incubator type serves a different purpose. Here is how to match the incubator to your laboratory application.",
-    image: "/sites/resido/images/blog-renovations.jpg",
-    sections: [
-      { heading: "Bacteriological vs BOD Incubators", content: "Bacteriological incubators maintain temperatures above ambient (typically 25–60°C) for microbial culture and colony counting. BOD incubators add refrigeration to maintain temperatures below ambient (5–50°C), making them essential for Biological Oxygen Demand testing, seed germination, and pharmaceutical stability studies. The choice depends on whether your application requires cooling capability." },
-      { heading: "When You Need CO₂ Control", content: "CO₂ incubators are specialized for mammalian cell culture, maintaining precise temperature (37°C), humidity (95%), and CO₂ concentration (5%). They include HEPA filtration and contamination-resistant interiors. If your work involves cell lines, tissue culture, or IVF, a CO₂ incubator is not optional — it is the foundation of your workflow." },
-      { heading: "Capacity and Uniformity", content: "Chamber size should match your typical load with room for air circulation. Forced-air systems improve temperature uniformity compared to gravity convection. For critical applications, look for specifications showing ±0.5°C uniformity or better across the working volume." },
-    ],
-  },
-  {
-    slug: "laboratory-safety-equipment-essentials",
-    title: "Laboratory Safety Equipment Essentials",
-    readTime: "8 min read",
-    date: "February 28, 2026",
-    author: "Sayaro Technical Team",
-    authorRole: "Equipment Specialists",
-    category: "Laboratory Safety",
-    excerpt: "Fume hoods, laminar flow cabinets, and water distillation units — the essential safety and airflow equipment every laboratory needs.",
-    image: "/sites/resido/images/blog-enduring.png",
-    sections: [
-      { heading: "Fume Hoods for Chemical Safety", content: "Fume hoods protect operators from hazardous fumes, vapors, and particulates during chemical handling. Available in tabletop and floor-standing models, they use continuous airflow to draw contaminants away from the breathing zone. Proper face velocity (0.3–0.5 m/s) and regular airflow testing are critical for effective protection." },
-      { heading: "Laminar Flow for Contamination Control", content: "Laminar flow cabinets provide a particle-free work environment using HEPA-filtered unidirectional airflow. Horizontal flow cabinets protect the product from contamination, while vertical flow cabinets protect both the product and the operator. They are essential for microbiology, tissue culture, and pharmaceutical compounding." },
-      { heading: "Water Distillation for Laboratory Purity", content: "Laboratory water distillation units produce high-purity water for reagent preparation, instrument rinsing, and analytical procedures. Wall-mounted and tabletop models serve different space and volume requirements. Regular descaling and element replacement maintain output quality and production rates." },
-    ],
-  },
-  {
-    slug: "guide-to-laboratory-furnaces",
-    title: "Guide to Laboratory Furnaces",
-    readTime: "5 min read",
-    date: "January 10, 2026",
-    author: "Sayaro Technical Team",
-    authorRole: "Equipment Specialists",
-    category: "Equipment Guide",
-    excerpt: "Muffle furnaces, tubular furnaces, and hot air ovens — understanding temperature ranges, applications, and selection criteria.",
-    image: "/sites/resido/images/blog-philosophy.png",
-    sections: [
-      { heading: "Muffle Furnaces", content: "Muffle furnaces provide uniform high-temperature heating (up to 1000°C, 1200°C, or 1400°C depending on the model) for ashing, sintering, heat treatment, and material testing. Lab models suit routine analytical work, while heavy-duty grooved-type models handle continuous industrial operation. Programmable PID controllers with ramp/soak capability allow precise temperature profiling." },
-      { heading: "Tubular Furnaces", content: "Tubular furnaces offer controlled-atmosphere heating in a cylindrical work tube, making them ideal for material synthesis, catalyst preparation, and thermal analysis under inert or reactive gas conditions. Available in 1200°C and 1400°C models, they support precise temperature control over small sample volumes." },
-      { heading: "Hot Air Ovens", content: "Hot air ovens use forced convection to provide uniform heating for drying, sterilizing, and curing applications. Standard models operate up to 250°C, while high-temperature models reach 300°C or above. Proper air circulation design ensures even temperature distribution across all shelf positions." },
-    ],
-  },
-  {
-    slug: "temperature-controlled-water-baths",
-    title: "Temperature-Controlled Water Baths",
-    readTime: "7 min read",
-    date: "December 5, 2025",
-    author: "Sayaro Technical Team",
-    authorRole: "Equipment Specialists",
-    category: "Equipment Guide",
-    excerpt: "Constant temperature, refrigerated, oil, and serological water baths — choosing the right thermal bath for your laboratory workflow.",
-    image: "/sites/resido/images/blog-renovations.jpg",
-    sections: [
-      { heading: "Types of Water Baths", content: "Constant-temperature water baths maintain a set temperature for sample incubation, reagent warming, and serological testing. Refrigerated water baths extend the range below ambient for low-temperature applications. Oil baths handle temperatures above 100°C where water would evaporate. Serological water baths are specifically designed for blood bank and clinical laboratory applications." },
-      { heading: "Single-Wall vs Double-Wall Construction", content: "Single-wall baths are economical for basic heating applications. Double-wall baths provide better insulation, reducing heat loss and energy consumption while maintaining more stable temperatures. For critical applications requiring ±0.1°C stability, double-wall construction with PID control is recommended." },
-      { heading: "Shaking and Agitation Options", content: "Water bath shakers combine temperature control with orbital or reciprocal agitation for applications requiring sample mixing during incubation — microbiology culture, solubility testing, and extraction procedures. Select the agitation speed range and motion type based on your specific application requirements." },
-    ],
-  },
-  {
-    slug: "setting-up-a-new-laboratory",
-    title: "Setting Up a New Laboratory",
-    readTime: "9 min read",
-    date: "November 15, 2025",
-    author: "Sayaro Technical Team",
-    authorRole: "Equipment Specialists",
-    category: "Equipment Guide",
-    excerpt: "A practical guide to equipping a new laboratory — from essential equipment selection to layout planning and supplier evaluation.",
-    image: "/sites/resido/images/blog-enduring.png",
-    sections: [
-      { heading: "Equipment Prioritization", content: "Start with the equipment your core workflows depend on — sterilization (autoclaves), sample preparation (ovens, furnaces), incubation (matched to your application), and safety (fume hoods, laminar flow). Secondary equipment like specialized water baths, shakers, and distillation units can follow as workflows are established." },
-      { heading: "Layout and Infrastructure", content: "Equipment placement affects workflow efficiency, safety, and maintenance access. Autoclaves need steam exhaust routing, fume hoods require adequate make-up air, and furnaces need clearance from combustible materials. Plan utility connections — power, water, drainage, and gas — before equipment arrives, not after." },
-      { heading: "Supplier Evaluation", content: "Evaluate suppliers on product range, technical support capability, customization options, delivery reliability, and after-sales service. A supplier who understands your application can recommend the right configuration and capacity — preventing both over-specification (wasted budget) and under-specification (inadequate performance)." },
-    ],
   },
 ];

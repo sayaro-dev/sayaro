@@ -4,14 +4,12 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { SectionLabel } from "./SectionLabel";
-import { urlFor } from "@/lib/sanity";
-
 interface Product {
   _id: string;
   title: string;
   slug: { current: string };
-  category: string;
-  image?: any;
+  category?: { _id: string; sector: string; slug: { current: string } };
+  imageUrl?: string;
   overview?: string;
 }
 
@@ -104,9 +102,9 @@ export function ProjectsCarousel({ products }: ProjectsCarouselProps) {
                     <span className="size-[7px] rounded-full bg-neutral-700" />
                   </div>
                   <div className="relative aspect-[5/4] overflow-hidden rounded-xl">
-                    {project.image ? (
+                    {project.imageUrl ? (
                       <Image
-                        src={urlFor(project.image).width(520).height(416).url()}
+                        src={project.imageUrl}
                         alt={project.title}
                         fill
                         className="object-cover"
@@ -124,7 +122,7 @@ export function ProjectsCarousel({ products }: ProjectsCarouselProps) {
                     {project.title}
                   </h4>
                   <p className="mt-1 font-heading text-sm text-neutral-500">
-                    {project.category}
+                    {project.category?.sector}
                   </p>
                 </div>
               </a>
