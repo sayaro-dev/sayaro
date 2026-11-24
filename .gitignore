@@ -50,3 +50,6 @@ temp/
 
 # Playwright MCP logs
 .playwright-mcp/
+
+# Sanity auto-generated
+.sanity/

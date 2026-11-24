@@ -1,0 +1,13 @@
+export const metadata = {
+  title: 'Sayaro CMS Studio',
+}
+
+export default function StudioLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <div style={{ height: '100vh', margin: 0 }}>{children}</div>
+  )
+}
